@@ -6,9 +6,15 @@ import { GlobalErrorsInterceptor } from './task/shared/infraestructure/error-han
 import { DomainToInfrastructureMapper } from './task/shared/infraestructure/error-handling/DomainToInfrastructureMap';
 import { LoggerSwitcher } from './utils/logger-switcher';
 import { MetaController } from './api/v1/meta/MetaController';
+import { TypeOrmSwitcherModule } from './utils/TypeOrmSwitcher.module';
 
 @Module({
-  imports: [LoggerSwitcher.init({ disable: config.testModeEnabled })],
+  imports: [
+    LoggerSwitcher.init({ disable: config.testModeEnabled }),
+    TypeOrmSwitcherModule.init({
+      disable: config.testModeEnabled && !config.forceEnableMikroORMRepositories,
+    }),
+  ],
   controllers: [MetaController],
   providers: [
     {

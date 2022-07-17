@@ -1,8 +1,8 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { DataSource } from 'typeorm';
 import { config } from './config';
 import { AccountEntity } from './task/accounts/infraestructure/AccountRepositoryTypeORM/Account.entity';
 
-const typeOrmConfig: TypeOrmModuleOptions = {
+const AppDataSource = new DataSource({
   type: 'postgres',
   host: config.database.host,
   port: config.database.port,
@@ -11,9 +11,7 @@ const typeOrmConfig: TypeOrmModuleOptions = {
   database: config.database.database,
   entities: [AccountEntity],
   synchronize: true,
-  migrations: ['migrations/*.js'],
-};
+  migrations: ['src/migrations/*.ts'],
+});
 
-export default typeOrmConfig;
-
-// TODO: Add to app Modules
+export default AppDataSource;

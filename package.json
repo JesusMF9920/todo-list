@@ -16,12 +16,14 @@
     "start:prod": "node dist/main.js",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "migration:create": "mikro-orm migration:create",
-    "migration:run": "mikro-orm migration:up",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest --runInBand",
     "test:acceptance_unitary": "jest --config ./test/jest-acceptance-and-unitary.json",
     "test:watch": "jest --watch",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:create": "yarn typeorm migration:generate -d ./src/dataSource.ts ./src/migrations/migration",
+    "migration:run": "yarn typeorm migration:run -d ./src/dataSource.ts",
+    "migration:revert": "yarn typeorm migration:revert -d ./src/dataSource.ts",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
@@ -36,6 +38,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/schedule": "^2.1.0",
     "@nestjs/swagger": "^6.0.1",
+    "@nestjs/typeorm": "^9.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "nestjs-pino": "^2.6.0",
@@ -44,7 +47,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "swagger-ui-express": "^4.4.0"
+    "swagger-ui-express": "^4.4.0",
+    "typeorm": "^0.3.7"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
