@@ -42,6 +42,10 @@ class JwtAuthGuard implements CanActivate {
   }
 }
 
+export enum DocumentationRoles {
+  GENERAL_USER = 'GENERAL_USER',
+}
+
 export function GuardWithJwt(accountTypes: AccountType[]) {
   return applyDecorators(
     ApiBearerAuth('access-token'),
