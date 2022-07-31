@@ -13,6 +13,9 @@ const mikroORMConfig: Options = {
   migrations: {
     path: './migrations',
   },
+  driverOptions: {
+    rejectUnauthorized: false,
+  },
 };
 
 export default mikroORMConfig;
