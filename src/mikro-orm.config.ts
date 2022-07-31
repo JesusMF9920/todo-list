@@ -14,7 +14,7 @@ const mikroORMConfig: Options = {
     path: './migrations',
   },
   driverOptions: {
-    connection: { ssl: true },
+    connection: { ssl: { rejectUnauthorized: false } },
   },
 };
 
